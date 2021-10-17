@@ -1,5 +1,8 @@
 # Korean FastSpeech 2 with GST - PyTorch Implementation
-This is project has only vanilla FastSpeech2 and GST. You should combine GST and FastSpeech2.
+This project has only vanilla FastSpeech2 and GST. 
+
+You should combine GST and FastSpeech2. Full code will be provided after 3 month.
+
 
 ![](./img/fastspeech2.png)
 
@@ -8,8 +11,11 @@ This is project has only vanilla FastSpeech2 and GST. You should combine GST and
 
 ## Requirements
 Python >= 3.7
+
 PyTorch >= 1.7.1
+
 librosa >= 0.8.0
+
 g2pk
 
 # Training
