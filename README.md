@@ -57,6 +57,11 @@ Use
 tensorboard --logdir output/log/
 ```
 
+![](./img/tensorboard.png)
+
+![](./img/mel.png)
+
+
 # References
 - [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558), Y. Ren, *et al*.
 - [Style Tokens: Unsupervised Style Modeling, Control and Transfer in End-to-End Speech Synthesis](https://arxiv.org/abs/1803.09017), Y. Wang, *et al*.
