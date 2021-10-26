@@ -10,34 +10,32 @@ You should combine GST and FastSpeech2. Full code will be provided after 3 month
 
 
 ## Requirements
-Python >= 3.7
-
-PyTorch >= 1.7.1
-
-librosa >= 0.8.0
-
-g2pk
-
-MFA
+- Python >= 3.7
+- PyTorch >= 1.7.1
+- librosa >= 0.8.0
+- g2pk
+- MFA
 
 # Training
-
 
 ## Datasets
 Korea Single Speaker Speech (KSS) Dataset [https://www.kaggle.com/bryanpark/korean-single-speaker-speech-dataset](https://www.kaggle.com/bryanpark/korean-single-speaker-speech-dataset)
 
 Kaist Audiobook Dataset [https://aihub.or.kr/opendata/kaist-audiobook](https://aihub.or.kr/opendata/kaist-audiobook)
 
-
 ## Preprocessing
  
-First, create '.lab' files. You can easily convert '.txt' file into '.lab' file by few code. Write the code according to your environment and prepare '.lab' files.
+First, create '.lab' files. 
+
+You can easily convert '.txt' file into '.lab' file by few code. 
+
+Write the code according to your environment and prepare '.lab' files.
 
 ### Important
 To runnign mfa, '.lab' files must be same directory as wav files.
 
 Ex)
-```
+```python
 f = open("[filename].txt", "r")
 line = f.readline()
 w = open("[filename].lab", "w")
@@ -87,13 +85,15 @@ To training mfa, you must have the following directory structure.
 
 and Train mfa
 
-```
+```bash
 mfa train [data_path] [dictionary_path] [output_path] –c
 ```
 
+It is recommended to set [output_path] 'your_data_path/TextGrid'.
+
 After that, run the preprocessing script by
 
-```
+```bash
 python3 preprocess.py
 ```
 
@@ -103,7 +103,8 @@ The outputs of 'preprocess.py' are npy files (mel-spectrogram, pitch, energy, du
 ## Training
 
 Train your model with
-```
+
+```bash
 python3 train.py
 ```
 
@@ -112,7 +113,8 @@ if you want to change some training setting, then modify './config/train.yaml'
 # TensorBoard
 
 Use
-```
+
+```bash
 tensorboard --logdir output/log/
 ```
 
