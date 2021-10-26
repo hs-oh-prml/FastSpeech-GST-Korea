@@ -98,7 +98,8 @@ python3 preprocess.py
 ```
 
 you should check 'preprocessed_path' in './config/preprecess.yaml' before run 'preprocess.py' 
-The outputs of 'preprocess.py' are npy files (mel-spectrogram, pitch, energy, duration) and training information files (train.txt, val.txt), overall meta files (stat.json, speaker.json)
+
+The outputs of 'preprocess.py' are mel-spectrograms, pitchs, energys, durations, train.txt, val.txt, stat.json, speaker.json
 
 ## Training
 
