@@ -18,6 +18,8 @@ librosa >= 0.8.0
 
 g2pk
 
+MFA
+
 # Training
 
 
@@ -29,25 +31,74 @@ Kaist Audiobook Dataset [https://aihub.or.kr/opendata/kaist-audiobook](https://a
 
 ## Preprocessing
  
-First, run 
+First, create '.lab' files. You can easily convert '.txt' file into '.lab' file by few code. Write the code according to your environment and prepare '.lab' files.
+
+### Important
+To runnign mfa, '.lab' files must be same directory as wav files.
+
+Ex)
 ```
-python3 prepare_align.py
+f = open("[filename].txt", "r")
+line = f.readline()
+w = open("[filename].lab", "w")
+w.write(line)
+f.close()
+w.close()
 ```
-for some preparations.
+
+If you complete to prepare '.lab' files, run 'prepare_align.py' to create dictionary files.
+
+```
+python3 prepare_align.py --in_path [.lab files path] --save_path [dictionary save path]
+```
+
+### Montreal Forced Aligner (Anaconda environment)
 
 As described in the paper, [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/) (MFA) is used to obtain the alignments between the utterances and the phoneme sequences.
+
+It is recommended to build a new virtual environment different from the virtual environment to be used for learning.
+
+``` 
+conda create -n alinger -c conda-forge openblas python=3.8 openfst pynini ngram baumwelch 
+conda activate aligner 
+pip install montreal-forced-aligner 
+mfa thirdparty download
+```
+
+#### Important 
+To training mfa, you must have the following directory structure.
+
+```bash
+[data_path]
+    └───[spk 1]
+            ├───[utterence 1].lab
+            ├───[utterence 1].wav
+            ├───[utterence 2].lab
+            ├───[utterence 2].wav
+            ├─── ...        
+    └───[spk 2]
+            ├───[utterence 1].lab
+            ├───[utterence 1].wav
+            ├───[utterence 2].lab
+            ├───[utterence 2].wav
+            ├─── ...
+    └─── ....
+```
 
 and Train mfa
 
 ```
-mfa train wav_path dictionary_path output_path –c
+mfa train [data_path] [dictionary_path] [output_path] –c
 ```
 
-
 After that, run the preprocessing script by
+
 ```
 python3 preprocess.py
 ```
+
+you should check 'preprocessed_path' in './config/preprecess.yaml' before run 'preprocess.py' 
+The outputs of 'preprocess.py' are npy files (mel-spectrogram, pitch, energy, duration) and training information files (train.txt, val.txt), overall meta files (stat.json, speaker.json)
 
 ## Training
 
@@ -55,6 +106,8 @@ Train your model with
 ```
 python3 train.py
 ```
+
+if you want to change some training setting, then modify './config/train.yaml'
 
 # TensorBoard
 
